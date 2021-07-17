@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="card profile-card">
+            <ul class="list-group side-menu">
+                <li class="list-group-item">
+                    <a
+                        [routerLink]="[ '/friends' ]"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}"
+                    >
+                        Friends
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a
+                        [routerLink]="[ '/friends/friend-requests' ]"
+                        routerLinkActive="active"
+                    >
+                        Friend Requests
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a
+                        [routerLink]="[ '/friends/network' ]"
+                        routerLinkActive="active"
+                    >
+                        Network
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <router-outlet></router-outlet>
+    </div>
+</div>

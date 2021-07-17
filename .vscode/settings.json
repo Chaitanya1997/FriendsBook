@@ -1,0 +1,21 @@
+{
+     "html.format.indentInnerHtml": true,
+     "html.format.wrapLineLength": 0,
+     "angular-template-formatter.indentWidth": 4,
+     "angular-template-formatter.skipContents": [
+
+          "p",
+          "li",
+          "span",
+          "em",
+          "strong",
+          "i",
+          "b",
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6"
+     ]
+}

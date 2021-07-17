@@ -1,0 +1,88 @@
+<div
+    class="card"
+    *ngIf="noFriends"
+>
+    <div class="card-body text-center">
+        <i
+            class="fa fa-bell icon-lg text-primary"
+            aria-hidden="true"
+        ></i>
+        <p class="m-0 mt-2">
+            You do not have any friend yet! Make some friends...
+        </p>
+    </div>
+</div>
+
+<div
+    *ngIf="isLoading || isLoadingError"
+    class="card p-3 my-3"
+>
+    <div class="card-body text-center">
+        <div
+            *ngIf="isLoading"
+            class="spinner-border"
+            role="status"
+        >
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div
+            *ngIf="isLoadingError"
+            class="text-danger"
+        >
+            Error occured while loading friends
+        </div>
+    </div>
+</div>
+
+<div
+    class="card show-friends mb-3"
+    *ngFor="let friend of friends"
+>
+    <div class="card-body row align-items-center">
+        <div class="col-sm-2">
+            <img
+                [src]="friend?.friendIcon"
+                class="friend-photo"
+            >
+        </div>
+        <div class="col-sm-5">
+            <div class="show-friend-header">
+                {{ friend?.firstName }} {{ friend?.lastName }}
+            </div>
+            <div class="profession">{{friend?.profession}}</div>
+        </div>
+        <div class="col-sm-5">
+            <div
+                *ngIf="friend?.isRequest"
+                class="text-end"
+            >
+                <button
+                    class="btn btn-danger me-2"
+                    type="button"
+                    (click)="onRejectButtonClick(friend)"
+                >
+                    Reject
+                </button>
+                <button
+                    class="btn btn-primary"
+                    type="button"
+                    (click)="onAcceptButtonClick(friend)"
+                >
+                    Accept
+                </button>
+            </div>
+            <div
+                class="text-end"
+                *ngIf="friend?.isFriend"
+            >
+                <button
+                    class="btn btn-primary"
+                    type="button"
+                    disabled
+                >
+                    You Are Friend
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

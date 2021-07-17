@@ -1,0 +1,374 @@
+<div class="row">
+    <div class="col-md-3">
+        <app-profile></app-profile>
+    </div>
+    <div class="col-md-6 ps-5">
+
+        <div
+            *ngIf="isLoading || isLoadingError"
+            class="card p-3 my-3"
+        >
+            <div class="card-body text-center">
+                <div
+                    *ngIf="isLoading"
+                    class="spinner-border"
+                    role="status"
+                >
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div
+                    *ngIf="isLoadingError"
+                    class="text-danger"
+                >
+                    Error occured while loading settings
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="card"
+            *ngIf="!isLoading"
+        >
+            <div class="card-body">
+                <form
+                    [formGroup]="form"
+                    (ngSubmit)="onSubmit()"
+                >
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="firstName"
+                                >
+                                    First Name
+                                </label>
+                                <input
+                                    type="text"
+                                    formControlName="firstName"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                                    placeholder="Ex. Virat"
+                                >
+                                <div
+                                    *ngIf="submitted && f.firstName.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="lastName"
+                                >
+                                    Last Name
+                                </label>
+                                <input
+                                    type="text"
+                                    formControlName="lastName"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                                    placeholder="Ex. Kohli"
+                                >
+                                <div
+                                    *ngIf="submitted && f.lastName.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="dob"
+                                >
+                                    Date Of Birth
+                                </label>
+                                <input
+                                    type="date"
+                                    formControlName="dob"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.dob.errors }"
+                                >
+                                <div
+                                    *ngIf="submitted && f.dob.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.dob.errors.required">DOB is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="email"
+                                >
+                                    Email
+                                </label>
+                                <input
+                                    type="text"
+                                    formControlName="email"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                    placeholder="name@example.com"
+                                >
+                                <div
+                                    *ngIf="submitted && f.email.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="gender"
+                                >
+                                    Gender
+                                </label>
+                                <select
+                                    class="form-select"
+                                    aria-label="Default select example"
+                                    formControlName="gender"
+                                    [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
+                                >
+                                    <option
+                                        style="color: lightgray !important;"
+                                        selected
+                                        disabled
+                                        value="0"
+                                    >
+                                        Select Gender
+                                    </option>
+                                    <option [value]="genders.male">{{ genders.male }}</option>
+                                    <option [value]="genders.female">{{ genders.female }}</option>
+                                </select>
+                                <div
+                                    *ngIf="submitted && f.gender.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.gender.errors.required">Gender is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="email"
+                                >
+                                    Phone Number
+                                </label>
+                                <input
+                                    type="text"
+                                    formControlName="phone"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+                                    placeholder="Ex. 9988889882"
+                                >
+                                <div
+                                    *ngIf="submitted && f.phone.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.phone.errors.required">Phone No is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="country"
+                                >
+                                    Country
+                                </label>
+                                <select
+                                    class="form-select"
+                                    aria-label="Default select example"
+                                    formControlName="country"
+                                    [ngClass]="{ 'is-invalid': submitted && f.country.errors }"
+                                >
+                                    <option
+                                        style="color: lightgray !important;"
+                                        selected
+                                        disabled
+                                        value="0"
+                                    >
+                                        Select country
+                                    </option>
+                                    <option
+                                        [value]="item"
+                                        *ngFor="let item of countries"
+                                    >
+                                        {{item}}
+                                    </option>
+                                </select>
+                                <div
+                                    *ngIf="submitted && f.country.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.country.errors.required">Country is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="state"
+                                >
+                                    State
+                                </label>
+                                <select
+                                    class="form-select"
+                                    aria-label="Default select example"
+                                    formControlName="state"
+                                    [ngClass]="{ 'is-invalid': submitted && f.state.errors }"
+                                >
+                                    <option
+                                        style="color: lightgray !important;"
+                                        selected
+                                        disabled
+                                        value="0"
+                                    >
+                                        Select State
+                                    </option>
+                                    <option
+                                        [value]="item"
+                                        *ngFor="let item of states"
+                                    >
+                                        {{item}}
+                                    </option>
+                                </select>
+                                <div
+                                    *ngIf="submitted && f.state.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.state.errors.required">State is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="city"
+                                >
+                                    City
+                                </label>
+                                <select
+                                    class="form-select"
+                                    aria-label="Default select example"
+                                    formControlName="city"
+                                    [ngClass]="{ 'is-invalid': submitted && f.city.errors }"
+                                >
+                                    <option
+                                        style="color: lightgray !important;"
+                                        selected
+                                        disabled
+                                        value="0"
+                                    >
+                                        Select City
+                                    </option>
+                                    <option
+                                        [value]="item"
+                                        *ngFor="let item of cities"
+                                    >
+                                        {{item}}
+                                    </option>
+                                </select>
+                                <div
+                                    *ngIf="submitted && f.city.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.city.errors.required">City is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="pincode"
+                                >
+                                    Pin Code
+                                </label>
+                                <input
+                                    type="text"
+                                    formControlName="pincode"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }"
+                                    placeholder="Ex. Virat"
+                                >
+                                <div
+                                    *ngIf="submitted && f.pincode.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.pincode.errors.required">Pin Code is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label
+                                    class="mb-2"
+                                    for="profession"
+                                >
+                                    Profession
+                                </label>
+                                <input
+                                    type="text"
+                                    formControlName="profession"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.profession.errors }"
+                                    placeholder="Ex. Virat"
+                                >
+                                <div
+                                    *ngIf="submitted && f.profession.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.profession.errors.required">Profession is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button
+                                class="btn btn-primary"
+                                color="primary"
+                                (click)="onSubmit()"
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

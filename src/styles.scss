@@ -1,1 +1,86 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: #f0f8ff;
+}
+
+label {
+    font-weight: 500 !important;
+}
+
+.bg-blue {
+    background-color: #3f51b5;
+    background: #3f51b5;
+    color: #fff !important;
+}
+
+.dialog-title-hr {
+    border: 0;
+    height: 3px !important;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        #3f51b5,
+        rgba(0, 0, 0, 0)
+    );
+    background-color: unset;
+    opacity: unset;
+    margin-bottom: 0;
+}
+
+.card {
+    border: 0 !important;
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+        0 1px 3px 0 rgb(0 0 0 / 12%);
+}
+
+.round-image {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.alert-sm {
+    padding: 0.5rem 1rem !important;
+}
+
+.alert-sm.alert-dismissible .btn-close {
+    padding: 0.75rem 1rem !important;
+}
+
+.font-normal {
+    font-weight: normal !important;
+}
+
+.side-menu {
+    a {
+        text-decoration: none;
+    }
+
+    a.active {
+        color: green !important;
+    }
+}
+
+.icon-sm {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+}
+
+.icon-lg {
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+}
+
+.icon-xl {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+}
+
+.profession {
+    font-size: 14px;
+    color: grey;
+    font-weight: 500;
+}

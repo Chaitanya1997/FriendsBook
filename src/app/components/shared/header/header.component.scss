@@ -1,0 +1,27 @@
+.user-dropdown {
+    a {
+        text-decoration: unset;
+    }
+
+    .dropdown-menu {
+        padding: 0;
+        right: 0;
+        left: unset;
+    }
+
+    .dropdown-item {
+        cursor: pointer;
+        padding: 0.5rem 1.5rem;
+    }
+
+    .user-profile-img {
+        font-size: 22px;
+        margin-right: 5px;
+    }
+
+    .profile-img {
+        display: inline-block;
+        margin-left: 18px;
+        font-size: 22px;
+    }
+}

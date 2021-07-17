@@ -1,0 +1,16 @@
+.profile-photo {
+    width: 130px;
+    height: 130px;
+    margin-top: -70px;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.profile-image-place {
+    place-content: stretch center;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+}
