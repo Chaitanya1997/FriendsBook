@@ -35,6 +35,12 @@ export class ApiService {
     return this.http.get<any[]>(`${environment.apiUrl}/posts/`, this.httpOptions);
   }
 
+  updateBulkPosts(updatePayload: any) {
+    return this.http.post<Post>(this.apiBaseURL + '/posts/updatemanyposts', updatePayload).pipe(res => {
+      return res;
+    });
+  }
+
   getAllPostsByUserId(userId: string) {
     return this.http.post(`${environment.apiUrl}/posts/findpostbyuserid`, { id: userId }, this.httpOptions);
   }

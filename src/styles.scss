@@ -19,15 +19,12 @@ label {
 .dialog-title-hr {
     border: 0;
     height: 3px !important;
-    background-image: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0),
-        #3f51b5,
-        rgba(0, 0, 0, 0)
-    );
+    background-image: linear-gradient(to right,
+            rgba(0, 0, 0, 0),
+            #3f51b5,
+            rgba(0, 0, 0, 0));
     background-color: unset;
     opacity: unset;
-    margin-bottom: 0;
 }
 
 .card {
@@ -63,6 +60,12 @@ label {
     }
 }
 
+.icon-xs {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
 .icon-sm {
     font-size: 22px;
     width: 22px;
@@ -85,4 +88,15 @@ label {
     font-size: 14px;
     color: grey;
     font-weight: 500;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.profile-cover-photo {
+    height: 150px;
+    overflow: hidden;
+    background: #41464b;
+    background: linear-gradient(to bottom, rgb(63 81 181 / 25%), rgb(0 0 0 / 65%));
 }

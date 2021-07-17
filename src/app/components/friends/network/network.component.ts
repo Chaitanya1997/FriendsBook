@@ -32,11 +32,16 @@ export class NetworkComponent implements OnInit {
         return;
       }
 
-      this.userHelper.createNetworkUserList(this.currentUser._id, allUsers).subscribe(networkUsers => {
-        this.isLoading = false;
-        this.noUsers = networkUsers.length === 0 ? true : false;
-        this.networkUsers = networkUsers;
-      });
+      this.userHelper.createNetworkUserList(this.currentUser._id, allUsers).subscribe(
+        (networkUsers: any) => {
+          this.isLoading = false;
+          this.noUsers = networkUsers.length === 0 ? true : false;
+          this.networkUsers = networkUsers;
+        },
+        (error: any) => {
+          this.isLoading = false;
+          this.isLoadingError = error;
+        });
     });
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { FileUploadService } from '../services/fileupload.service';
+import { ApiService } from '../services/api.service';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 
@@ -11,30 +11,33 @@ export class ProfileHelperService {
   private messageSource = new BehaviorSubject(false);
   currentMessage = this.messageSource.asObservable();
 
-  constructor(private fileService: FileUploadService, private postService: PostService, private userService: UserService) { }
+  constructor(
+    private apiService: ApiService,
+    private userService: UserService
+  ) { }
 
-  updatePostPhotoId(userId, photoId): Observable<any> {
-    return this.postService.updateBulkPosts({ userId: userId, photoId: photoId });
+  updatePostPhotoId(userId: any, photoId: any): Observable<any> {
+    return this.apiService.updateBulkPosts({ userId: userId, photoId: photoId });
   }
 
-  updateUserPhotoId(userId, photoId): Observable<any> {
+  updateUserPhotoId(userId: any, photoId: any): Observable<any> {
     return this.userService.updateUserPhoto({ id: userId, photoId: photoId });
   }
 
-  performPhotoUpdate(event): Observable<any> {
+  performPhotoUpdate(event: { target: { files: string | any[]; }; }): Observable<any> {
     return new Observable(observer => {
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
         const formData = new FormData();
         formData.append('picture', file);
-        this.fileService.uploadImage(formData).subscribe(uploadResult => {
+        this.apiService.uploadImage(formData).subscribe((uploadResult: any) => {
           observer.next(uploadResult);
         });
       }
     });
   }
 
-  changeActiveUserProfilePhoto(userId, event): Observable<any> {
+  changeActiveUserProfilePhoto(userId: any, event: any): Observable<any> {
     return new Observable(observer => {
       this.performPhotoUpdate(event).subscribe(uploadResult => {
         this.updateUserPhotoId(userId, uploadResult.uploadId).subscribe(() => {

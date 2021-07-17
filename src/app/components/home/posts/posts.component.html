@@ -33,7 +33,7 @@
 
                 <input
                     #fileInput
-                    hidden=true
+                    hidden="true"
                     type="file"
                     class="image-upload"
                     id="imageInput"
@@ -55,23 +55,30 @@
                 [src]="url"
                 height="200"
             >
-            
+
         </form>
     </div>
 </div>
 
 <div
-    *ngIf="postsLoading || postsLoadingError"
-    class="card p-3 my-3"
+    *ngIf="postsLoading"
+    class="card p-3 my-4"
 >
     <div class="card-body text-center">
         <div
-            *ngIf="postsLoading"
             class="spinner-border"
             role="status"
         >
             <span class="sr-only">Loading...</span>
         </div>
+    </div>
+</div>
+
+<div
+    *ngIf="postsLoadingError"
+    class="card p-3 my-4"
+>
+    <div class="card-body text-center">
         <div
             *ngIf="postsLoadingError"
             class="text-danger"

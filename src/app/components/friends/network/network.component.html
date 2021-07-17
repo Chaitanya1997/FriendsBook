@@ -1,6 +1,31 @@
 <div class="row">
-    <div class="col ps-5">
+    <div class="col">
+        <!-- Loading spinner -->
+        <div
+            *ngIf="isLoading"
+            class="card p-3"
+        >
+            <div class="card-body text-center">
+                <div
+                    class="spinner-border"
+                    role="status"
+                >
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
 
+        <!-- Any Error -->
+        <div
+            *ngIf="isLoadingError"
+            class="card p-3"
+        >
+            <div class="card-body text-center">
+                <div class="text-danger">Error occured while loading settings</div>
+            </div>
+        </div>
+
+        <!-- No Data Found -->
         <div
             class="card"
             *ngIf="noUsers"
@@ -8,35 +33,14 @@
             <div class="card-body">
                 <i
                     class="fa fa-bell  icon-lg"
-                    aria-hidden="true"
-                ></i>
+                    aria-hidden="true"></i>
                 <p class="mt-2 profession">
                     No registered user available in your network ...
                 </p>
             </div>
         </div>
 
-        <div
-            *ngIf="isLoading || isLoadingError"
-            class="card p-3 my-3"
-        >
-            <div class="card-body text-center">
-                <div
-                    *ngIf="isLoading"
-                    class="spinner-border"
-                    role="status"
-                >
-                    <span class="sr-only">Loading...</span>
-                </div>
-                <div
-                    *ngIf="isLoadingError"
-                    class="text-danger"
-                >
-                    Error occured while loading settings
-                </div>
-            </div>
-        </div>
-
+        <!-- Data Found -->
         <div *ngIf="!isLoading">
             <div
                 *ngFor="let user of networkUsers"

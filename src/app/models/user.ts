@@ -8,5 +8,6 @@ export interface User {
     gender: string;
     token: string;
     profession: string;
+    photoId: string;
     _id: string;
 }

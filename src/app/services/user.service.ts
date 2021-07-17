@@ -41,7 +41,7 @@ export class UserService {
 
     updateUserPhoto(updatedUser: any) {
         return this.http.post(this.apiBaseURL + 'users/updateuserphotoId', updatedUser, this.header.requestHeaders()).pipe(res => {
-            this.toastService.success('Image Uploaded Successfully');
+            this.toastService.success('Profile Photo Uploaded Successfully');
             return res;
         });
     };
