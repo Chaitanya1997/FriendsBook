@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Post } from 'src/app/models/Post';
+import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -15,7 +15,7 @@ import { PostService } from 'src/app/services/post.service';
 export class PostsComponent implements OnInit {
 
   form: FormGroup;
-  activeUserObject!: User;
+  currentUser!: User;
   uploadedImage: any;
   url: string | ArrayBuffer | null | undefined;
   existingPhotoId!: string;
@@ -30,21 +30,19 @@ export class PostsComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {
 
-    this.authenticationService.currentUser.subscribe(((data) => {
-      this.activeUserObject = data;
-    }));
+    // Current user value
+    this.currentUser = this.authenticationService.currentUserValue;
 
     this.form = this.formBuilder.group({
       post: ['', Validators.required],
-      userId: [this.activeUserObject._id],
+      userId: [this.currentUser._id],
       userPhotoId: [this.existingPhotoId],
-      userName: [this.activeUserObject.firstName + ' ' + this.activeUserObject.lastName],
-      isAdmin: [this.activeUserObject.isAdmin],
-      profession: [this.activeUserObject.profession]
+      userName: [this.currentUser.firstName + ' ' + this.currentUser.lastName],
+      isAdmin: [this.currentUser.isAdmin],
+      profession: [this.currentUser.profession]
     });
-  }
 
-  user !: User;
+  }
 
   ngOnInit(): void {
     this.existingPhotoId = localStorage.getItem('currentUserPhotoId')!;

@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { PostsComponent } from './components/home/posts/posts.component';
 import { ProfileComponent } from './components/home/profile/profile.component';
-import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { JwtInterceptor } from './helpers/interceptors/jwt.interceptor';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { FriendsComponent } from './components/friends/friends/friends.component';
 import { FriendRequestsComponent } from './components/friends/friend-requests/friend-requests.component';

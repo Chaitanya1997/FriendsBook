@@ -11,17 +11,17 @@ import { User } from 'src/app/models/user';
 })
 export class FriendsComponent implements OnInit {
   friends: any[] = [];
-  activeUserObject: any;
+  currentUser: any;
   noFriends!: Boolean;
   isLoading: Boolean = true;
   isLoadingError: Boolean = false;
 
   constructor(private userHelper: UserHelperService) {
-    this.activeUserObject = JSON.parse(localStorage.getItem('currentUser')!);
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
   }
 
   ngOnInit() {
-    this.userHelper.loadRequestingFriends(this.activeUserObject._id).subscribe(finalRequesters => {
+    this.userHelper.loadRequestingFriends(this.currentUser._id).subscribe(finalRequesters => {
       this.isLoading = false;
       this.noFriends = finalRequesters.length === 0 ? true : false;
       this.friends = finalRequesters;

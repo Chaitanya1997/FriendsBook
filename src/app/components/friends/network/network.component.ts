@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NetworkComponent implements OnInit {
   networkUsers: any[] = [];
-  activeUserObject: any;
+  currentUser: any;
   noUsers: Boolean = false;
   isLoading: Boolean = true;
   isLoadingError: Boolean = false;
@@ -21,7 +21,7 @@ export class NetworkComponent implements OnInit {
     private userService: UserService,
     private userHelper: UserHelperService
   ) {
-    this.activeUserObject = JSON.parse(localStorage.getItem('currentUser')!);
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
   }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class NetworkComponent implements OnInit {
         return;
       }
 
-      this.userHelper.createNetworkUserList(this.activeUserObject._id, allUsers).subscribe(networkUsers => {
+      this.userHelper.createNetworkUserList(this.currentUser._id, allUsers).subscribe(networkUsers => {
         this.isLoading = false;
         this.noUsers = networkUsers.length === 0 ? true : false;
         this.networkUsers = networkUsers;
@@ -43,7 +43,7 @@ export class NetworkComponent implements OnInit {
   onRequestButtonClick(userClicked: any) {
     let friendRequestObject = {
       id: '',
-      userId: this.activeUserObject._id,
+      userId: this.currentUser._id,
       friendId: userClicked.id,
       status: 'Request Pending'
     }

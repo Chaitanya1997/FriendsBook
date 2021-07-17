@@ -61,14 +61,14 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        (data) => {
+        () => {
           this.loading = false;
-          this.toastService.success('Login Successful');
+          this.toastService.success('Authentication Successful !');
           this.router.navigate([this.returnUrl]);
         },
-        error => {
+        (error) => {
           this.alertService.error(error);
-          this.toastService.success('Authentication Failed');
+          this.toastService.danger('Authentication Failed !');
           this.loading = false;
         });
   }

@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -32,6 +33,7 @@ export class ForgotPasswordComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private alertService: AlertService,
+    private toastService: ToastService,
     private datePipe: DatePipe,
     private authenticationService: AuthenticationService
   ) {
@@ -89,7 +91,7 @@ export class ForgotPasswordComponent implements OnInit {
           this.loading = false;
           this.foundUser = this.findByDoB(data, this.f.dob.value);
           this.foundUser && this.router.navigate(['/login', 'recover']);
-          this.noUserFound = true;
+          !this.foundUser && (this.noUserFound = true);
         },
         error => {
           this.alertService.error(error);
@@ -98,7 +100,35 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onPasswordReset() {
+
     this.forgotPasswordFormSubmitted = true;
+
+    if (this.forgotPasswordForm.invalid)
+      return;
+
+    if (
+      this.forgotPasswordForm.value.password === undefined ||
+      this.forgotPasswordForm.value.password === '' ||
+      (this.forgotPasswordForm.value.password).length <= 8) {
+      this.toastService.danger("Please enter more than 8 characters password!");
+      return;
+    }
+
+    if (this.forgotPasswordForm.value.password !== this.forgotPasswordForm.value.confirmPassword) {
+      this.toastService.danger("Password entered do not match!");
+      return;
+    }
+
+    let updateUserReqBody = {
+      id: this.foundUser.id,
+      password: this.forgotPasswordForm.value.password
+    }
+
+    if (this.forgotPasswordForm.value.password === this.forgotPasswordForm.value.password) {
+      this.userService.updateUser(updateUserReqBody).subscribe((data) => {
+        console.log(data);
+      })
+    }
   }
 
   findByDoB(userList: any, dob: any) {
@@ -124,4 +154,4 @@ lastName: "Kohli"
 password: "$2a$10$nNtnGy2RNEdlXX/VcOXxqOdRgTpOzOnyUePhHQmZwBSb4Wx6IaTNy"
 photoId: "60f0887496257100049a7e4b"
 __v: 0
-_id: "60f0887496257100049a7e4c"
+id: "60f0887496257100049a7e4c"

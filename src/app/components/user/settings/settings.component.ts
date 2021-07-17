@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
-import { Gender } from 'src/app/models/common';
+import { Gender } from 'src/app/models/constants';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -19,19 +20,23 @@ export class SettingsComponent implements OnInit {
   isLoading = true;
   isLoadingError = false;
   form!: FormGroup;
-  activeUserObject: any;
+  currentUser: any;
   submitted: boolean = false;
   genders = Gender;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private toastService: ToastService,
-    private utility: UtilityService) {
-    this.activeUserObject = JSON.parse(localStorage.getItem('currentUser')!);
+    private utility: UtilityService,
+    private authenticationService: AuthenticationService
+  ) {
+    // Current user value
+    this.currentUser = this.authenticationService.currentUserValue;
   }
 
   ngOnInit() {
-    this.userService.getUserById(this.activeUserObject._id).subscribe(
+    this.userService.getUserById(this.currentUser._id).subscribe(
       (currentUser: any) => {
         if (currentUser !== null && currentUser !== undefined) {
           this.createUserForm(currentUser);
@@ -48,7 +53,7 @@ export class SettingsComponent implements OnInit {
 
   createUserForm(currentUser: any) {
     this.form = this.formBuilder.group({
-      id: [currentUser.id],
+      id: [currentUser._id],
       firstName: [currentUser.firstName, Validators.required],
       lastName: [currentUser.lastName, Validators.required],
       dob: [{ value: this.utility.convertDateFormat(currentUser.dob), disabled: true }],

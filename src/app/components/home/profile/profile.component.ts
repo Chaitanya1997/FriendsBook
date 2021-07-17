@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -10,25 +10,22 @@ import * as _ from 'underscore';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
 
   noOfPosts: number = 0;
   noOfConnections: number = 0;
-  user !: User;
+
+  @Input() currentUser!: User;
 
   constructor(
     private apiService: ApiService,
-    private friendsService: FriendService,
-    private authenticationService: AuthenticationService
-  ) {
-    this.authenticationService.currentUser.subscribe((value) => {
-      this.user = value;
-    })
-  }
+    private friendsService: FriendService
+  ) { }
 
   ngOnInit(): void {
-    this.loadActiveUserConnections(this.user._id!);
-    this.loadActiveUserPostCounts(this.user._id!);
+    this.loadActiveUserConnections(this.currentUser._id!);
+    this.loadActiveUserPostCounts(this.currentUser._id!);
   }
 
   loadActiveUserPostCounts(userId: string) {

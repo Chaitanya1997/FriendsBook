@@ -9,7 +9,7 @@ import { DashboardComponent } from './components/home/dashboard/dashboard.compon
 import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { SettingsComponent } from './components/user/settings/settings.component';
-import { AuthGuard } from './helpers/auth.guard';
+import { AuthGuard } from './helpers/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

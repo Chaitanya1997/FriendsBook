@@ -85,7 +85,7 @@ export class UserHelperService {
 
   createNetworkUserList(userId: any, allUsers: User[]): Observable<any> {
     return new Observable(observer => {
-      allUsers = _.filter(allUsers, function (user) { return user._id !== userId; });
+      allUsers = _.filter(allUsers, function (user) { return user.id !== userId; });
       if (allUsers.length === 0) {
         observer.next(allUsers);
       }
