@@ -12,4 +12,5 @@ export interface Post {
      isPostImage: string;
      postImage: string;
      userIcon: string;
+     isMyPost: boolean;
 }

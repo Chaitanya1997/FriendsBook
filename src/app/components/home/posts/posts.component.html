@@ -86,7 +86,7 @@
         class="card my-4"
     >
         <div class="card-body">
-            <div class="d-flex mb-3">
+            <div class="d-flex align-items-center mb-3">
                 <img
                     [src]="post.userIcon || '/assets/user-male.png'"
                     class="d-block ui-w-50 rounded-circle"
@@ -98,9 +98,32 @@
                         {{post.profession}} . {{post.postTimer}} ago
                     </div>
                 </div>
+                <div
+                    class="cursor-pointer"
+                    *ngIf="currentUser.isAdmin; else activeUsersPost"
+                >
+                    <i
+                        class="fa fa-ban icon-lg text-danger"
+                        (click)="onHidePostClick(post)"
+                    ></i>
+                </div>
+                <ng-template #activeUsersPost>
+                    <div
+                        class="cursor-pointer"
+                        *ngIf=post.isMyPost
+                    >
+                        <i
+                            class="fa fa-ban icon-lg text-danger"
+                            (click)="onHidePostClick(post)"
+                        ></i>
+                    </div>
+                </ng-template>
             </div>
             <p class="m-0 p-0">{{post.post}}</p>
-            <div class="text-center" *ngIf=post.isPostImage>
+            <div
+                class="text-center"
+                *ngIf=post.isPostImage
+            >
                 <img src="{{post.postImage}}">
             </div>
         </div>
