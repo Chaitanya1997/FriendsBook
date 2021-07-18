@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -26,6 +26,8 @@ export class ForgotPasswordComponent implements OnInit {
   foundUser!: User;
   returnUrl!: string;
   noUserFound: boolean = false;
+
+  @Input('forgotPassword') forgotPassword !: boolean;
 
   constructor(
     private formBuilder: FormBuilder,

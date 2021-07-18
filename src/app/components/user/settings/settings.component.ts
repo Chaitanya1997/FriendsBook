@@ -14,6 +14,7 @@ import { UtilityService } from 'src/app/services/utility.service';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+
   cities: string[] = ['Bhopal', 'Lucknow', 'Mumbai', 'Jaipur', 'Panji', 'Ranchi'];
   states: string[] = ['MP', 'UP', 'MH', 'RJ', 'GA', 'JK'];
   countries: string[] = ['India'];
@@ -23,6 +24,11 @@ export class SettingsComponent implements OnInit {
   currentUser: any;
   submitted: boolean = false;
   genders = Gender;
+  active = 1;
+
+  forgotPasswordForm: FormGroup;
+  forgotPasswordFormSubmitted = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +39,12 @@ export class SettingsComponent implements OnInit {
   ) {
     // Current user value
     this.currentUser = this.authenticationService.currentUserValue;
+
+    this.forgotPasswordForm = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
   }
 
   ngOnInit() {
@@ -117,4 +129,40 @@ export class SettingsComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  get forgotPasswordFormControls() { return this.forgotPasswordForm.controls; }
+
+  onPasswordReset() {
+
+    this.forgotPasswordFormSubmitted = true;
+
+    if (this.forgotPasswordForm.invalid)
+      return;
+
+    if (
+      this.forgotPasswordForm.value.password === undefined ||
+      this.forgotPasswordForm.value.password === '' ||
+      (this.forgotPasswordForm.value.password).length <= 8) {
+      this.toastService.danger("Please enter more than 8 characters password!");
+      return;
+    }
+
+    if (this.forgotPasswordForm.value.password !== this.forgotPasswordForm.value.confirmPassword) {
+      this.toastService.danger("Password entered do not match!");
+      return;
+    }
+
+    let updateUserReqBody = {
+      id: this.currentUser._id,
+      password: this.forgotPasswordForm.value.password
+    }
+
+    if (this.forgotPasswordForm.value.password === this.forgotPasswordForm.value.password) {
+      this.userService.updateUser(updateUserReqBody).subscribe((data) => {
+        console.log(data);
+      })
+    }
+  }
+
+
 }
