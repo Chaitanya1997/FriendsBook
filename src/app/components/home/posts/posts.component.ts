@@ -16,10 +16,11 @@ export class PostsComponent implements OnInit {
 
   form: FormGroup;
   currentUser!: User;
-  uploadedImage: any;
+  uploadedImageEvent: any;
   url: string | ArrayBuffer | null | undefined;
   existingPhotoId!: string;
   posts!: Post[];
+  noPosts: boolean = false;
   postsLoading: boolean = true;
   postsLoadingError: boolean = false;
 
@@ -46,19 +47,19 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.existingPhotoId = localStorage.getItem('currentUserPhotoId')!;
-    this.getAllPosts();
+    this.loadPosts();
   }
 
-  getAllPosts() {
+  loadPosts() {
     this.postsLoading = true;
-    this.apiService.getAllPosts().subscribe(
-      (data: any) => {
-        console.log(data);
+    this.postService.loadPosts(this.currentUser._id).subscribe(
+      (finalPosts: any) => {
+        console.log(finalPosts);
         this.postsLoading = false;
-        this.posts = [...data];
+        this.noPosts = finalPosts.length <= 0 ? true : false;
+        this.posts = [...finalPosts];
       },
-      (error) => {
-        console.log(error);
+      () => {
         this.postsLoadingError = true;
         this.postsLoading = false;
       }
@@ -66,25 +67,27 @@ export class PostsComponent implements OnInit {
   }
 
   onSubmit() {
-
     if (this.form.invalid)
       return;
 
-    const formData = new FormData();
-    formData.append('picture', this.uploadedImage);
-
-    console.log(this.form.value.post);
-
-    if (this.uploadedImage != null) {
-      this.postService.uploadPostImage(this.form.value, formData).subscribe(() => {
+    if (this.uploadedImageEvent != null) {
+      this.postService.uploadPostImage(this.form.value, this.uploadedImageEvent).subscribe(() => {
         this.ngOnInit();
       });
     }
+    
     else {
       this.apiService.createPost(this.form.value).subscribe(() => {
         this.ngOnInit();
       })
     }
+  }
+
+  onHidePostClick(postToHide: Post) {
+    postToHide.isActive = false;
+    this.apiService.updatePost(postToHide).subscribe(() => {
+      this.loadPosts();
+    });
   }
 
   onPostImageUpload(event: any) {
@@ -98,7 +101,7 @@ export class PostsComponent implements OnInit {
     }
 
     if (event.target.files.length > 0) {
-      this.uploadedImage = event.target.files[0];
+      this.uploadedImageEvent = event;
     }
 
   }

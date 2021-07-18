@@ -17,7 +17,6 @@
                 >
             </span>
         </div>
-
         <div
             *ngIf="isImageLoaded"
             fxLayoutAlign="center"
@@ -42,17 +41,21 @@
             (change)="onProfilePhotoUpload($event)"
         >
     </div>
-
     <div class="card-body">
         <div class="card-text my-1">
-            <h5 class="text-center m-0">{{currentUser.firstName}} {{currentUser.lastName}}</h5>
+            <h5 class="text-center m-0">
+                {{currentUser.firstName}} {{currentUser.lastName}}
+            </h5>
             <hr class="dialog-title-hr">
             <div class="d-grid gap-2 fw-500 justify-content-center align-items-center">
-                <div routerLink="/friends">
-                    <span class="text-primary me-2">{{noOfConnections}}</span>
+                <div
+                    class="text-primary-hover cursor-pointer"
+                    routerLink="/friends"
+                >
+                    <span class="text-primary  me-2">{{noOfConnections}}</span>
                     <span>Connections</span>
                 </div>
-                <div>
+                <div class="text-primary-hover">
                     <span class="text-primary me-2">{{noOfPosts}}</span>
                     <span>Posts</span>
                 </div>

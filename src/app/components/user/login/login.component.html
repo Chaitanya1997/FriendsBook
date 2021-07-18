@@ -21,14 +21,14 @@
                         formControlName="email"
                         class="form-control"
                         [ngClass]="{
-                          'is-invalid': submitted && f.email.errors
+                          'is-invalid': submitted && loginFormControls.email.errors
                      }"
                     >
                     <div
-                        *ngIf="submitted && f.email.errors"
+                        *ngIf="submitted && loginFormControls.email.errors"
                         class="invalid-feedback"
                     >
-                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="loginFormControls.email.errors.required">Email is required</div>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -43,14 +43,14 @@
                         formControlName="password"
                         class="form-control"
                         [ngClass]="{
-                          'is-invalid': submitted && f.password.errors
+                          'is-invalid': submitted && loginFormControls.password.errors
                      }"
                     >
                     <div
-                        *ngIf="submitted && f.password.errors"
+                        *ngIf="submitted && loginFormControls.password.errors"
                         class="invalid-feedback"
                     >
-                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="loginFormControls.password.errors.required">Password is required</div>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
@@ -74,6 +74,9 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="bg-white px-3 text-center">
+            <app-alert></app-alert>
         </div>
         <div class="card-footer bg-white p-3 text-center">
             <button

@@ -1,10 +1,15 @@
 export interface Post {
+     id: string;
      post: string;
      userId: string;
-     userName: string;
      userPhotoId: string;
      postImageId: string;
-     isActive: boolean;
+     userName: string;
      isAdmin: boolean;
      profession: string;
+     isActive: boolean;
+     postTimer: string;
+     isPostImage: string;
+     postImage: string;
+     userIcon: string;
 }

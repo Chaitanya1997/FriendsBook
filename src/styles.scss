@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import './styles/custom-bootstrap-theme.scss';
+@import "./styles/custom-bootstrap-theme.scss";
 
 body {
     background-color: #f0f8ff;
@@ -19,10 +19,12 @@ label {
 .dialog-title-hr {
     border: 0;
     height: 3px !important;
-    background-image: linear-gradient(to right,
-            rgba(0, 0, 0, 0),
-            #3f51b5,
-            rgba(0, 0, 0, 0));
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        #3f51b5,
+        rgba(0, 0, 0, 0)
+    );
     background-color: unset;
     opacity: unset;
 }
@@ -98,5 +100,23 @@ label {
     height: 150px;
     overflow: hidden;
     background: #41464b;
-    background: linear-gradient(to bottom, rgb(63 81 181 / 25%), rgb(0 0 0 / 65%));
+    background: linear-gradient(
+        to bottom,
+        rgb(63 81 181 / 25%),
+        rgb(0 0 0 / 65%)
+    );
+}
+
+.alert-sm {
+    padding: 0.5rem 0.5rem;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-primary-hover {
+    &:hover {
+        color: $primary;
+    }
 }

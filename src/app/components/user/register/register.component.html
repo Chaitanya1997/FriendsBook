@@ -8,6 +8,7 @@
             <form
                 [formGroup]="registerForm"
                 (ngSubmit)="onSubmit()"
+                [matchPasswords]="['password', 'confirmPassword']"
             >
                 <div class="row">
                     <div class="col-md-6">
@@ -57,7 +58,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -97,10 +97,9 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
                             >
                                 <option
-                                    style="color: lightgray !important;"
                                     selected
                                     disabled
-                                    value="0"
+                                    value
                                 >
                                     Select Gender
                                 </option>
@@ -116,7 +115,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -165,11 +163,11 @@
                                 <div *ngIf="f.confirmPassword.errors.minlength">
                                     Confirm Password must be at least 6 characters
                                 </div>
+                                <div *ngIf="f.confirmPassword.errors.passwordMismatch">Passwords must match</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col">
                         <button

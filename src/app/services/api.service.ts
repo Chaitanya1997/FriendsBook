@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Post } from '../models/post';
 import { User } from '../models/user';
+import { Post } from '../models/post';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -45,10 +45,15 @@ export class ApiService {
     return this.http.post(`${environment.apiUrl}/posts/findpostbyuserid`, { id: userId }, this.httpOptions);
   }
 
-  createPost(reqBody: Post) {
+  createPost(reqBody: any) {
     return this.http.post(`${environment.apiUrl}/posts/createpost`, reqBody, this.httpOptions);
   }
 
+  updatePost(updatedPost: Post) {
+    return this.http.put<Post>(this.apiBaseURL + 'posts/' + updatedPost.id, updatedPost).pipe(res => {
+      return res;
+    });
+  };
 
   /* 
   ***      ***
@@ -66,11 +71,5 @@ export class ApiService {
       return res;
     });
   }
-
-  /* 
-  ***      ***
-  *** Friends ***
-  ***      ***
-  */
 
 }

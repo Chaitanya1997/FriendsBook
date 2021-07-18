@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -23,6 +23,8 @@ import { FriendsHomeComponent } from './components/friends/friends-home/friends-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainer } from './components/shared/toasts-container.componen';
 import { SettingsComponent } from './components/user/settings/settings.component';
+import { AlertComponent } from './components/shared/alert/alert.component';
+import { PasswordMatchValidatorDirective } from './helpers/directives/password-match-validator.directive';
 
 @NgModule({
   declarations: [
@@ -41,16 +43,20 @@ import { SettingsComponent } from './components/user/settings/settings.component
     FriendRequestsComponent,
     FriendsHomeComponent,
     SettingsComponent,
-    ToastsContainer
+    AlertComponent,
+    ToastsContainer,
+    PasswordMatchValidatorDirective
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     NgbModule
   ],
   providers: [
+    PasswordMatchValidatorDirective,
     DatePipe,
     {
       provide: HTTP_INTERCEPTORS,

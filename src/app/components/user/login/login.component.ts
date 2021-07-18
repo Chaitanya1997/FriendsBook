@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  get f() { return this.loginForm.controls; }
+  get loginFormControls() { return this.loginForm.controls; }
 
   onSubmit() {
 
@@ -58,17 +58,17 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.email.value, this.f.password.value)
+    this.authenticationService.login(this.loginFormControls.email.value, this.loginFormControls.password.value)
       .pipe(first())
       .subscribe(
         () => {
           this.loading = false;
-          this.toastService.success('Authentication Successful !');
+          this.alertService.success('Authentication Successful !');
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
           this.alertService.error(error);
-          this.toastService.danger('Authentication Failed !');
+          this.alertService.error('Authentication Failed !');
           this.loading = false;
         });
   }

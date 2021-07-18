@@ -22,7 +22,6 @@
                     </label>
                 </div>
             </div>
-
             <div class="d-flex align-items-center justify-content-end">
                 <label
                     for="image-input"
@@ -30,7 +29,6 @@
                 >
                     <i class="fa fa-camera camera-position text-secondary"></i>
                 </label>
-
                 <input
                     #fileInput
                     hidden="true"
@@ -39,7 +37,6 @@
                     id="imageInput"
                     (change)="onPostImageUpload($event)"
                 >
-
                 <button
                     [disabled]="!form.valid"
                     mat-raised-button
@@ -49,17 +46,14 @@
                     Post
                 </button>
             </div>
-
             <img
                 *ngIf="url"
                 [src]="url"
                 height="200"
             >
-
         </form>
     </div>
 </div>
-
 <div
     *ngIf="postsLoading"
     class="card p-3 my-4"
@@ -73,7 +67,6 @@
         </div>
     </div>
 </div>
-
 <div
     *ngIf="postsLoadingError"
     class="card p-3 my-4"
@@ -87,7 +80,6 @@
         </div>
     </div>
 </div>
-
 <div *ngIf="!postsLoading && posts">
     <div
         *ngFor="let post of posts"
@@ -96,16 +88,21 @@
         <div class="card-body">
             <div class="d-flex mb-3">
                 <img
-                    src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                    class="d-block ui-w-40 rounded-circle"
+                    [src]="post.userIcon || '/assets/user-male.png'"
+                    class="d-block ui-w-50 rounded-circle"
                     alt
                 >
                 <div class="flex-grow-1 ms-3">
                     {{post.userName}}
-                    <div class="text-muted small">{{post.profession}} . 3 days ago</div>
+                    <div class="text-muted small">
+                        {{post.profession}} . {{post.postTimer}} ago
+                    </div>
                 </div>
             </div>
             <p class="m-0 p-0">{{post.post}}</p>
+            <div class="text-center" *ngIf=post.isPostImage>
+                <img src="{{post.postImage}}">
+            </div>
         </div>
     </div>
 </div>
