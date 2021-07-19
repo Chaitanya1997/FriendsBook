@@ -1,5 +1,8 @@
 # FriendsBook
 
+## Preview FriendsBook Application
+https://friendsbook-angular-app.herokuapp.com/
+
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
@@ -30,20 +33,20 @@ application:
 
 #### 1. Admin:
 An admin will be able to:
-    ✓ Block the account of any user
-    ✓ Change and reset the password
-    ✓ Post any message or advertisement
-    ✓ Manage profile details
-    ✓ Hide the post of any user
+* Block the account of any user
+* Change and reset the password
+* Post any message or advertisement
+* Manage profile details
+* Hide the post of any user
 #### 2. User:
 User’s will be able to:
-    ✓ Register themselves as a user
-    ✓ Change and reset their password
-    ✓ Post any message, article or upload picture
-    ✓ Send, accept or reject friend requests
-    ✓ Manage their profile details
-    ✓ Hide their own post
-    ✓ See posts from all the users
+* Register themselves as a user
+* Change and reset their password
+* Post any message, article or upload picture
+* Send, accept or reject friend requests
+* Manage their profile details
+* Hide their own post
+* See posts from all the users
     
 Other than the above functionality, application will have authorization/authentication based on JSON
 web token (JWT). 
