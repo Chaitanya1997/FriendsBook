@@ -11,9 +11,9 @@
         <button
             class="navbar-toggler"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
         >
@@ -22,89 +22,88 @@
 
         <div
             class="collapse navbar-collapse"
-            id="navbarResponsive"
+            id="navbarSupportedContent"
         >
+            <div *ngIf="(isUserLoggedIn | async); then authenticatedUser else guest"></div>
 
-            <ul class="navbar-nav ms-auto list-nav">
-                <li
-                    *ngIf="!user"
-                    class="nav-item mx-2"
-                >
-                    <a
-                        class="nav-link"
-                        routerLink="login"
-                        routerLinkActive="active"
-                    >
-                        Login
-                    </a>
-                </li>
-                <li
-                    *ngIf="!user"
-                    class="nav-item mx-2"
-                >
-                    <a
-                        class="nav-link"
-                        routerLink="register"
-                        routerLinkActive="active"
-                    >
-                        Register
-                    </a>
-                </li>
-                <li
-                    *ngIf="user"
-                    class="nav-item mx-2"
-                >
-                    <a
-                        class="nav-link"
-                        routerLink="home"
-                        routerLinkActive="active"
-                    >
-                        Home
-                    </a>
-                </li>
-                <li
-                    *ngIf="user"
-                    class="nav-item mx-2"
-                >
-                    <a
-                        class="nav-link"
-                        routerLink="friends"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}"
-                    >
-                        Friends
-                    </a>
-                </li>
-                <li
-                    *ngIf="user"
-                    class="nav-item mx-2"
-                >
-                    <a
-                        class="nav-link"
-                        routerLink="friends/network"
-                        routerLinkActive="active"
-                    >
-                        Network
-                    </a>
-                </li>
-                <li
-                    *ngIf="user"
-                    class="nav-item mx-2"
-                >
-                    <a
-                        class="nav-link"
-                        routerLink="settings"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}"
-                    >
-                        Settings
-                    </a>
-                </li>
-            </ul>
+            <ng-template #authenticatedUser>
+                <ul class="navbar-nav ms-auto list-nav">
+                    <li class="nav-item mx-2">
+                        <a
+                            class="nav-link"
+                            routerLink="home"
+                            routerLinkActive="active"
+                        >
+                            Home
+                        </a>
+                    </li>
+                    <li *ngIf="(isAdmin | async)" class="nav-item mx-2">
+                        <a
+                            class="nav-link"
+                            routerLink="users"
+                            routerLinkActive="active"
+                        >
+                            Users
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a
+                            class="nav-link"
+                            routerLink="friends"
+                            routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact: true}"
+                        >
+                            Friends
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a
+                            class="nav-link"
+                            routerLink="friends/network"
+                            routerLinkActive="active"
+                        >
+                            Network
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a
+                            class="nav-link"
+                            routerLink="settings"
+                            routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact: true}"
+                        >
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </ng-template>
+
+            <ng-template #guest>
+                <ul class="navbar-nav ms-auto list-nav">
+                    <li class="nav-item mx-2">
+                        <a
+                            class="nav-link"
+                            routerLink="login"
+                            routerLinkActive="active"
+                        >
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a
+                            class="nav-link"
+                            routerLink="register"
+                            routerLinkActive="active"
+                        >
+                            Register
+                        </a>
+                    </li>
+                </ul>
+            </ng-template>
 
             <div
                 *ngIf="user"
-                class="ms-5 dropdown user-dropdown"
+                class="mx-md-5 dropdown user-dropdown"
             >
                 <a
                     class="text-white dropdown-toggle"
@@ -120,6 +119,7 @@
                     ></i>
                     {{user.firstName}} {{user.lastName}}
                 </a>
+
 
                 <ul
                     class="dropdown-menu"
@@ -150,8 +150,9 @@
                         </a>
                     </li>
                 </ul>
-            </div>
 
+
+            </div>
         </div>
     </div>
 </nav>

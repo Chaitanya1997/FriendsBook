@@ -5,6 +5,7 @@ import { User } from '../models/user'
 import { environment } from 'src/environments/environment';
 import { HeaderService } from './header.service';
 import { ToastService } from './toast.service';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 
@@ -19,6 +20,12 @@ export class UserService {
 
     register(user: User) {
         return this.http.post(`${environment.apiUrl}/users/register`, user);
+    }
+
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(this.apiBaseURL + 'users/').pipe(res => {
+            return res;
+        });
     }
 
     getAll() {

@@ -1,4 +1,6 @@
 .user-dropdown {
+    padding: 0.5rem 0;
+
     a {
         text-decoration: unset;
     }
@@ -6,7 +8,6 @@
     .dropdown-menu {
         padding: 0;
         right: 0;
-        left: unset;
     }
 
     .dropdown-item {

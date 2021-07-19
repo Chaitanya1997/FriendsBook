@@ -10,6 +10,7 @@ import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { SettingsComponent } from './components/user/settings/settings.component';
 import { AuthGuard } from './helpers/guards/auth.guard';
+import { UsersComponent } from './components/admin/users/users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
     ]
   },
   { path: 'settings', component: SettingsComponent },
+  { path: 'users', component: UsersComponent },
   { path: '**', redirectTo: 'home' }
 ];
 

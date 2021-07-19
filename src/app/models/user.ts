@@ -1,5 +1,6 @@
 export interface User {
-    isAdmin: string;
+    isAdmin: boolean;
+    isActive: boolean;
     id: string;
     email: string;
     password: string;
@@ -10,4 +11,6 @@ export interface User {
     profession: string;
     photoId: string;
     _id: string;
+    phone: string;
+    city: string;
 }

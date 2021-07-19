@@ -25,6 +25,7 @@ import { ToastsContainer } from './components/shared/toasts-container.componen';
 import { SettingsComponent } from './components/user/settings/settings.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { PasswordMatchValidatorDirective } from './helpers/directives/password-match-validator.directive';
+import { UsersComponent } from './components/admin/users/users.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { PasswordMatchValidatorDirective } from './helpers/directives/password-m
     SettingsComponent,
     AlertComponent,
     ToastsContainer,
+    UsersComponent,
     PasswordMatchValidatorDirective
   ],
   imports: [
@@ -54,6 +56,9 @@ import { PasswordMatchValidatorDirective } from './helpers/directives/password-m
     HttpClientModule,
     AppRoutingModule,
     NgbModule
+  ],
+  exports:[
+    ProfileComponent
   ],
   providers: [
     PasswordMatchValidatorDirective,

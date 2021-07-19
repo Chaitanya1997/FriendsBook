@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-md-3">
+        <app-profile [currentUser]="currentUser"></app-profile>
+    </div>
+    <div class="col-md-9 ps-md-5">
+        <!-- No Users available -->
+        <div *ngIf="noUsers">
+            <div class="card-body text-center">
+                <i
+                    class="fa fa-bell icon-lg text-primary"
+                    aria-hidden="true"
+                ></i>
+                <p class="m-0 mt-2">No user registered till now ...</p>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div
+            *ngIf="isLoading"
+            class="card p-3"
+        >
+            <div class="card-body text-center">
+                <div
+                    class="spinner-border"
+                    role="status"
+                >
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error -->
+        <div
+            *ngIf="isLoadingError"
+            class="card p-3"
+        >
+            <div class="card-body text-center">
+                <div class="text-danger">Error occured while loading friends</div>
+            </div>
+        </div>
+
+        <div
+            *ngIf="!isLoading && !noUsers"
+            class="card"
+        >
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Profession</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users">
+                            <td>{{user.firstName}} {{user.lastName}}</td>
+                            <td>{{user.city}}</td>
+                            <td>{{user.phone}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.profession}}</td>
+                            <td>
+                                <span
+                                    *ngIf="user.isActive"
+                                    class="cursor-pointer text-success"
+                                >
+                                    <a (click)="onDisableUserClick(user)">
+                                        <i class="fa fa-toggle-on"></i>
+                                        Active
+                                    </a>
+                                </span>
+                                <span
+                                    *ngIf="!user.isActive"
+                                    class="cursor-pointer text-danger"
+                                >
+                                    <a (click)="onEnableUserClick(user)">
+                                        <i class="fa fa-toggle-off"></i>
+                                        Blocked
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
